@@ -1,5 +1,6 @@
 #include "cuboid.h"
 #include <math.h>
+#include <stdbool.h>
 
 void set_size(Cuboid* cuboid, double x, double y, double z)
 {
@@ -20,7 +21,7 @@ double calc_surface(const Cuboid* cuboid)
 	return surface;
 }
 
-/*Boolean isSquare(const Cuboid* cuboid)
+bool isSquare(const Cuboid* cuboid)
 {
 	if (cuboid->x == cuboid->y || cuboid->x == cuboid->z || cuboid->y == cuboid->z)
 	{
@@ -31,4 +32,3 @@ double calc_surface(const Cuboid* cuboid)
         return false;
     }
 }
-*/

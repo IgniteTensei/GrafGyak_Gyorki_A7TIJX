@@ -1,6 +1,8 @@
 #ifndef CUBOID_H
 #define CUBOID_H
 
+#include <stdbool.h>
+
 typedef struct Cuboid
 {
 	double x;
@@ -15,6 +17,6 @@ double calc_volume(const Cuboid* cuboid);
 
 double calc_surface(const Cuboid* cuboid);
 
-//Boolean isSquare(const Cuboid* cuboid);
+bool isSquare(const Cuboid* cuboid);
 
 #endif
