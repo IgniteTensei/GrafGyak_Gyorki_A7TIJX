@@ -10,21 +10,12 @@
 
 int main(int argc, char* argv[])
 {
-    Color color;
     Line line;   
 
-    int error_code;
     SDL_Window* window;
     bool need_run;
     SDL_Event event;
     SDL_GLContext gl_context;
-    int i;
-
-    error_code = SDL_Init(SDL_INIT_EVERYTHING);
-    if (error_code != 0) {
-        printf("[ERROR] SDL initialization error: %s\n", SDL_GetError());
-        return error_code;
-    }
 
     window = SDL_CreateWindow(
         "Lines",
@@ -33,8 +24,6 @@ int main(int argc, char* argv[])
         SDL_WINDOW_OPENGL);
 
     gl_context = SDL_GL_CreateContext(window);
-    glBegin(GL_LINES);
-
 
     need_run = true;
     while (need_run) {
@@ -43,35 +32,42 @@ int main(int argc, char* argv[])
         glClear(GL_COLOR_BUFFER_BIT); 
         glColor3f(1, 0, 0);
 
+        bool lineDrawing;
+        int x;
+        int y;
+
         while (SDL_PollEvent(&event)) {
             switch (event.type) {
                 case SDL_SCANCODE_Q:
                     need_run = false;
                     break;
                 case SDL_MOUSEBUTTONDOWN:
-                    if (event.button.button == SDL_BUTTON_LEFT) {
-                        glColor3f(1, 0, 0);
-                        line.x = event.button.x;
-                        line.y = event.button.y;
-                        glVertex2f(line.x, line.y);
-                    }
-                    break;
-                case SDL_MOUSEBUTTONUP:
-                    if (event.button.button == SDL_BUTTON_LEFT) {
-                        glColor3f(1, 0, 0);
-                        line.x = event.button.x;
-                        line.y = event.button.y;
-                        glVertex2f(line.x, line.y);
-                    }
+
+                    glBegin(GL_LINES);
+                    glVertex2f(0, 0);
+                    
+                    SDL_GetMouseState(&x, &y);
+                    printf("x: %f\n", (float)x/100);
+                    printf("y: %f\n", (float)y/100);
+
+                    glVertex2f((float)x/100, (float)y/100);
+                    
+                    if(event.button.button == SDL_BUTTON_LEFT)
+                        printf("LEFT\n");
+                        
+
+                    if(event.button.button == SDL_BUTTON_RIGHT)
+                        printf("RIGHT\n");
+                        
+                    glEnd();
+
                     break;
                 case SDL_QUIT:
                 need_run = false;
                 break;
       }
     }
-   
-        glEnd();
-
+        
         SDL_GL_SwapWindow(window);
     }
 
