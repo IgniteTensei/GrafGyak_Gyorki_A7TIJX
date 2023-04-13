@@ -55,9 +55,22 @@ int main(int argc, char* argv[])
 
     int x;
     int y;
+
     int clickcounter = 0;
+    int maxLineCount = 3;
+
     Line line;
 
+    Line nullLine;
+    initFirstPoint(&nullLine, (float)0, (float)0);
+    initLastPoint(&nullLine, (float)0, (float)0);
+
+    Line lineArray[maxLineCount];
+    for (int i = 0; i < maxLineCount; i++)
+    {
+        lineArray[i] = nullLine;
+    }
+    
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     SDL_GL_SwapWindow(window);
@@ -118,10 +131,25 @@ int main(int argc, char* argv[])
         //Render
         if (clickcounter == 2)
         {
+
+            /*for (int i = 0; i < maxLineCount; i++)
+            {
+                if (&lineArray[i] == &nullLine)
+                {
+                    lineArray[i] = line;
+                    break;
+                }
+            }*/
+
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+            //lineArrayDrawing(lineArray, maxLineCount);
             lineDrawing(&line);   
+
             SDL_GL_SwapWindow(window);
+
             clickcounter = 0;
+            line = nullLine;
         }
         
 

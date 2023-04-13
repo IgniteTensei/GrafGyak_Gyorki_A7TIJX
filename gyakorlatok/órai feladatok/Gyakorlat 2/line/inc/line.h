@@ -15,4 +15,6 @@ void initLastPoint(Line* line, float x, float y);
 
 void lineDrawing(Line* line);
 
+/*void lineArrayDrawing(Line* line[], int size);*/
+
 #endif
