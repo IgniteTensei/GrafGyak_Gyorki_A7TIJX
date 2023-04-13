@@ -60,6 +60,7 @@ int main(int argc, char* argv[])
 
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    SDL_GL_SwapWindow(window);
 
     while (is_running)
     {
@@ -104,8 +105,6 @@ int main(int argc, char* argv[])
                 else if (clickcounter == 2)
                 {
                     initLastPoint(&line, (float)x, (float)y);
-                    lineDrawing(&line);
-                    clickcounter = 0;
                 }
 
                 break;
@@ -119,10 +118,12 @@ int main(int argc, char* argv[])
         //Render
         if (clickcounter == 2)
         {
-            lineDrawing(&line);
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+            lineDrawing(&line);   
+            SDL_GL_SwapWindow(window);
             clickcounter = 0;
         }
-        SDL_GL_SwapWindow(window);
+        
 
     }
 
