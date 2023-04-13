@@ -1,33 +1,31 @@
 #include <GL/gl.h>
+
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_opengl.h>
 
 #include <stdbool.h>
-#include <math.h>
 #include <stdio.h>
 
 #include "line.h"
-#include "draw.h"
 
-void set_line_begin(Line* line, float beginX, float beginY)
+void initFirstPoint(Line* line, float x, float y)
 {
-    line->beginX = beginX;
-    line->beginY = beginY;
+    line->firstX = x;
+    line->firstY = y;
 }
 
-void set_line_end(Line* line, float endX, float endY)
+void initLastPoint(Line* line, float x, float y)
 {
-    line->endX = endX;
-    line->endY = endY;
+    line->lastX = x;
+    line->lastY = y;
 }
 
-void draw_line(Line* line)
+void lineDrawing(Line* line)
 {
     glBegin(GL_LINES);
-    glColor3f(1.0, 0.0, 0.0);
-    glVertex2f(line->beginX, line->beginY);
-    glVertex2f(line->endX, line->endY);
-    glEnd();
-
-    printf("drawing line");
+        glColor3f(1.0, 0.0, 0.0);
+        glVertex2f(line->firstX, line->firstY);
+        glVertex2f(line->lastX, line->lastY);
+        glEnd();
+        
 }

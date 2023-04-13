@@ -1,22 +1,18 @@
-#ifndef LINE_H
-#define LINE_H
+#ifndef GAME_H
+#define GAME_H
 
 #include <SDL2/SDL.h>
 
 typedef struct Line
 {
-	float beginX;
-	float beginY;
-	float endX;
-	float endY;
+    float firstX, firstY, lastX, lastY;
 
 } Line;
 
-void set_line_begin(Line* line, float beginX, float beginY);
+void initFirstPoint(Line* line, float x, float y);
 
-void set_line_end(Line* line, float endX, float endY);
+void initLastPoint(Line* line, float x, float y);
 
-void draw_line(Line* line);
+void lineDrawing(Line* line);
 
 #endif
-

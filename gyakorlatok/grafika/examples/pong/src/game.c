@@ -17,8 +17,7 @@ void init_game(Game* game, int width, int height)
     game->is_running = true;
 }
 
-void destroy_game(Game* game)
-{
+void destroy_game(Game* game){
     if (game->gl_context != NULL) {
         SDL_GL_DeleteContext(game->gl_context);
     }
