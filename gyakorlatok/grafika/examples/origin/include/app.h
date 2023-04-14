@@ -8,6 +8,7 @@
 
 #include <GL/gl.h>
 
+#include <stdio.h>
 #include <stdbool.h>
 
 #define VIEWPORT_RATIO (4.0 / 3.0)
