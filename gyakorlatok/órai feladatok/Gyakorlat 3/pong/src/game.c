@@ -1,6 +1,8 @@
 #include "game.h"
 
 #include <GL/gl.h>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_opengl.h>
 
 #include <stdio.h>
 
@@ -52,6 +54,12 @@ void handle_game_events(Game* game)
             case SDL_SCANCODE_S:
                 set_left_pad_speed(&(game->pong), +500);
                 break;
+            case SDL_SCANCODE_Q:
+                change_ball_size(&(game->pong), 10);
+                break;
+            case SDL_SCANCODE_E:
+                change_ball_size(&(game->pong), -10);
+                break;
             default:
                 break;
             }
@@ -65,6 +73,10 @@ void handle_game_events(Game* game)
             default:
                 break;
             }
+            break;
+        case SDL_MOUSEBUTTONUP:
+            SDL_GetMouseState(&x, &y);
+            set_ball_position(&(game->pong), (float)x, (float)y);
             break;
         case SDL_MOUSEMOTION:
             SDL_GetMouseState(&x, &y);

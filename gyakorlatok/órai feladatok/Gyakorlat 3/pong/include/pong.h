@@ -58,4 +58,14 @@ void set_right_pad_speed(Pong* pong, float speed);
  */
 void bounce_ball(Pong* pong);
 
+/**
+ * Set the position of the ball.
+ */
+void set_ball_position(Pong* pong, float x, float y);
+
+/**
+ * Set the size of the ball.
+ */
+void change_ball_size(Pong* pong, float size);
+
 #endif /* PONG_H */

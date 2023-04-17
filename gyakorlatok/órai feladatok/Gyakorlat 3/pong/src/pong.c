@@ -1,6 +1,7 @@
 #include "pong.h"
+#include <stdio.h>
 
-void init_pong(Pong* pong, int width, int height)
+void init_pong(Pong *pong, int width, int height)
 {
     pong->width = width;
     pong->height = height;
@@ -9,7 +10,7 @@ void init_pong(Pong* pong, int width, int height)
     init_ball(&(pong->ball), width / 2, height / 2);
 }
 
-void update_pong(Pong* pong, double time)
+void update_pong(Pong *pong, double time)
 {
     update_pad(&(pong->left_pad), time);
     update_pad(&(pong->right_pad), time);
@@ -17,49 +18,122 @@ void update_pong(Pong* pong, double time)
     bounce_ball(pong);
 }
 
-void render_pong(Pong* pong)
+void render_pong(Pong *pong)
 {
     render_pad(&(pong->left_pad));
     render_pad(&(pong->right_pad));
     render_ball(&(pong->ball));
 }
 
-void set_left_pad_position(Pong* pong, float position)
+void set_left_pad_position(Pong *pong, float position)
 {
     set_pad_position(&(pong->left_pad), position);
 }
 
-void set_left_pad_speed(Pong* pong, float speed)
+void set_left_pad_speed(Pong *pong, float speed)
 {
     set_pad_speed(&(pong->left_pad), speed);
 }
 
-void set_right_pad_position(Pong* pong, float position)
+void set_right_pad_position(Pong *pong, float position)
 {
     set_pad_position(&(pong->right_pad), position);
 }
 
-void set_right_pad_speed(Pong* pong, float speed)
+void set_right_pad_speed(Pong *pong, float speed)
 {
     set_pad_speed(&(pong->right_pad), speed);
 }
 
-void bounce_ball(Pong* pong)
+void bounce_ball(Pong *pong)
 {
-    if (pong->ball.x - pong->ball.radius < 50) {
-        pong->ball.x = pong->ball.radius + 50;
-        pong->ball.speed_x *= -1;
+
+    float direction_x = 1;
+
+    if (pong->ball.speed_x > 0)
+    {
+        direction_x = 1;
     }
-    if (pong->ball.x + pong->ball.radius > pong->width - 50) {
-        pong->ball.x = pong->width - pong->ball.radius - 50;
-        pong->ball.speed_x *= -1;
+    else
+    {
+        direction_x = -1;
     }
-    if (pong->ball.y - pong->ball.radius < 0) {
+
+    float direction_y = 1;
+
+    if (pong->ball.speed_y > 0)
+    {
+        direction_y = 1;
+    }
+    else
+    {
+        direction_y = -1;
+    }
+
+
+    if (pong->ball.x - pong->ball.radius < 50)
+    {
+        printf("bounce left");
+
+        if (!(pong->ball.y < pong->left_pad.y + 120 && pong->ball.y > pong->left_pad.y - 120))
+        {
+            init_ball(&(pong->ball), pong->width / 2, pong->height / 2);
+        }
+        else
+        {
+            pong->ball.x = pong->ball.radius + 50;
+            pong->ball.speed_x *= -1;
+
+            pong->ball.speed_x += 40 * -1 * direction_x;
+            pong->ball.speed_y += 40 * (pong->width / pong->height) * direction_y;
+        }
+        
+    }
+    if (pong->ball.x + pong->ball.radius > pong->width - 50)
+    {
+
+        printf("bounce right");
+
+        if (!(pong->ball.y < pong->right_pad.y + 120 && pong->ball.y > pong->right_pad.y - 120))
+        {
+            init_ball(&(pong->ball), pong->width / 2, pong->height / 2);
+        }
+        else
+        {
+            pong->ball.x = pong->width - pong->ball.radius - 50;
+            pong->ball.speed_x *= -1;
+
+            pong->ball.speed_x += 40 * -1 * direction_x;
+            pong->ball.speed_y += 40 * (pong->width / pong->height) * direction_y;
+        }
+
+    }
+    if (pong->ball.y - pong->ball.radius < 0)
+    {
         pong->ball.y = pong->ball.radius;
         pong->ball.speed_y *= -1;
     }
-    if (pong->ball.y + pong->ball.radius > pong->height) {
+    if (pong->ball.y + pong->ball.radius > pong->height)
+    {
         pong->ball.y = pong->height - pong->ball.radius;
         pong->ball.speed_y *= -1;
     }
+}
+
+void set_ball_position(Pong *pong, float x, float y)
+{
+    pong->ball.x = x;
+    pong->ball.y = y;
+}
+
+void change_ball_size(Pong* pong, float size)
+{
+    float rad = pong->ball.radius;
+    rad += size;
+
+    if (rad >= 10 && rad <= 100)
+    {
+        pong->ball.radius = rad;
+    }
+    
 }
