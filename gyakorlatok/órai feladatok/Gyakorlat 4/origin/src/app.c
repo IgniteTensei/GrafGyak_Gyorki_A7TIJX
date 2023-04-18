@@ -41,7 +41,7 @@ void init_app(App* app, int width, int height)
     reshape(width, height);
 
     init_camera(&(app->camera));
-    init_scene(&(app->scene));
+    init_scene(&(app->scene), 0);
 
     app->is_running = true;
 }
