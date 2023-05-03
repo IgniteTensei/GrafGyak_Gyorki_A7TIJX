@@ -9,3 +9,4 @@
  Természetesen minden textúrázva lenne szépen.
  Szeretnék egy minimális HUD-ot a tengeralattjáróhoz amin láthatnánk, hogy mondjuk be van e kapcsolva a lámpánk (ezt lehetne állítani gombnyomásra), esetleg lehetne élete.
  Ütközések figyelése (ha mondjuk a tengeralattjáró ütközik egy előre lerakott objektummal, mondjuk egy kő vagy a tengerfenék, akkor lemegy az élete), valamint a halaknak is lehetne hasonló funkciója (esetleg egy mininmális mesterséges intelligencia mellett amivel mozognak) az ütközések elkerülése miatt.
+A játék célja az lehetne hogy ellátogassunk kihelyezett helyekre (pl elsüllyedt hajó, korallok és hasonló érdekességek), ha ezeknek a közelébe kerülnénk akkor kapnánk egy pontot esetleg (és kiírná a képernyőre a nevét hogy mit is fedeztünk fel)
