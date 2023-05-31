@@ -1,0 +1,8 @@
+{
+    "C_Cpp.errorSquiggles": "disabled",
+    "files.associations": {
+        "load.h": "c",
+        "draw.h": "c",
+        "cmath": "c"
+    }
+}
