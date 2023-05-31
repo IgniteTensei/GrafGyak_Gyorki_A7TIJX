@@ -23,6 +23,8 @@ void set_submarine_material(const Material* material);
 
 void update_submarine(Submarine* submarine);
 
+void render_submarine(const Submarine* submarine);
+
 void render_sm_body(const Submarine* submarine);
 
 #endif /* SUBMARINE_H */

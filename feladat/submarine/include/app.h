@@ -4,6 +4,7 @@
 #include "camera.h"
 #include "scene.h"
 #include "submarine.h"
+#include "terrain.h"
 
 #include <SDL2/SDL.h>
 
@@ -21,6 +22,7 @@ typedef struct App
     Camera camera;
     Scene scene;
     Submarine submarine;
+    Terrain terrain;
 } App;
 
 /**

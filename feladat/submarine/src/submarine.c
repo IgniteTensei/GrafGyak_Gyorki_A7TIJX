@@ -5,7 +5,7 @@
 
 void init_submarine(Submarine* submarine)
 {
-    load_model(&(submarine->sm_body), "assets/models/submarine/body.obj");
+    load_model(&(submarine->sm_body), "assets/models/submarine.obj");
 
     submarine->material.ambient.red = 1.0;
     submarine->material.ambient.green = 1.0;
@@ -69,6 +69,7 @@ void render_submarine(const Submarine* submarine)
 void render_sm_body(const Submarine* submarine)
 {
     glPushMatrix();
+    glRotatef(90.0f, 1.0f, 0.0f, 0.0f);
     draw_model(&(submarine->sm_body));
     glPopMatrix();
 }

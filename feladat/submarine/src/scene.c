@@ -69,7 +69,7 @@ void update_scene(Scene* scene)
 
 void render_scene(const Scene* scene)
 {
-    //set_material(&(scene->material));
+    set_material(&(scene->material));
     set_lighting();
 }
 

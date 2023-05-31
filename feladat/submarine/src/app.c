@@ -1,6 +1,7 @@
 #include "app.h"
 
 #include <SDL2/SDL_image.h>
+#include <GL/gl.h>
 
 void init_app(App* app, int width, int height)
 {
@@ -39,11 +40,13 @@ void init_app(App* app, int width, int height)
 
     init_opengl();
     reshape(width, height);
+    set_fog();
 
     init_camera(&(app->camera));
     init_scene(&(app->scene));
 
     init_submarine(&(app->submarine));
+    init_terrain(&(app->terrain));
 
     app->is_running = true;
 }
@@ -55,7 +58,9 @@ void init_opengl()
     glEnable(GL_NORMALIZE);
     glEnable(GL_AUTO_NORMAL);
 
-    glClearColor(0.1, 0.1, 0.1, 1.0);
+    glEnable(GL_FOG);
+
+    glClearColor(0.05, 0.1, 0.3, 0.9);
 
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
@@ -95,8 +100,19 @@ void reshape(GLsizei width, GLsizei height)
     glFrustum(
         -.08, .08,
         -.06, .06,
-        .1, 10
+        .1, 50
     );
+}
+
+void set_fog()
+{
+    GLfloat fogColor[] = { 0.06f, 0.16f, 0.3f, 0.9f };
+    GLfloat fogDensity = 0.25f; 
+
+    glFogi(GL_FOG_MODE, GL_EXP); 
+    glFogfv(GL_FOG_COLOR, fogColor); 
+    glFogf(GL_FOG_DENSITY, fogDensity); 
+    glHint(GL_FOG_HINT, GL_NICEST); 
 }
 
 void handle_app_events(App* app)
@@ -146,10 +162,9 @@ void handle_app_events(App* app)
             }
             break;
         case SDL_MOUSEBUTTONDOWN:
-            
+            is_mouse_down = true;           
             break;
         case SDL_MOUSEMOTION:
-            is_mouse_down = true;
             SDL_GetMouseState(&x, &y);
             if (is_mouse_down) {
                 rotate_camera(&(app->camera), mouse_x - x, mouse_y - y);
@@ -182,6 +197,7 @@ void update_app(App* app)
     update_scene(&(app->scene));
 
     update_submarine(&(app->submarine));
+    update_terrain(&(app->terrain));
 }
 
 void render_app(App* app)
@@ -195,6 +211,7 @@ void render_app(App* app)
     render_scene(&(app->scene));
 
     render_submarine(&(app->submarine));
+    render_terrain(&(app->terrain));
     
     glPopMatrix();
 
