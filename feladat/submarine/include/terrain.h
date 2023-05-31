@@ -11,7 +11,9 @@
 typedef struct Terrain
 {
     Material material;
+
     Model plane;
+    GLuint plane_texture;
 
 } Terrain;
 

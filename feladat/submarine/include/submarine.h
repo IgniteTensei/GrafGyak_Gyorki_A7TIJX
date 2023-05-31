@@ -11,7 +11,9 @@
 typedef struct Submarine
 {
     Material material;
+
     Model sm_body;
+    GLuint sm_body_texture;
 
 } Submarine;
 

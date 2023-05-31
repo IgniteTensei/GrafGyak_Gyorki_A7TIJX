@@ -6,6 +6,7 @@
 void init_submarine(Submarine* submarine)
 {
     load_model(&(submarine->sm_body), "assets/models/submarine.obj");
+    submarine->sm_body_texture = load_texture("assets/textures/bodyColor_de_la_Superficie.png"); 
 
     submarine->material.ambient.red = 1.0;
     submarine->material.ambient.green = 1.0;
@@ -62,14 +63,18 @@ void update_submarine(Submarine* submarine)
 
 void render_submarine(const Submarine* submarine)
 {
-    //set_submarine_material(&(submarine->material));
+    set_submarine_material(&(submarine->material));
     render_sm_body(submarine);
 }
 
 void render_sm_body(const Submarine* submarine)
 {
     glPushMatrix();
+
+    glTranslatef(0.0f, 0.0f, 3.0f);
     glRotatef(90.0f, 1.0f, 0.0f, 0.0f);
+    glBindTexture(GL_TEXTURE_2D, submarine->sm_body_texture);
     draw_model(&(submarine->sm_body));
+
     glPopMatrix();
 }

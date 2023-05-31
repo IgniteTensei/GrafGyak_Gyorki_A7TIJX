@@ -107,7 +107,7 @@ void reshape(GLsizei width, GLsizei height)
 void set_fog()
 {
     GLfloat fogColor[] = { 0.06f, 0.16f, 0.3f, 0.9f };
-    GLfloat fogDensity = 0.25f; 
+    GLfloat fogDensity = 0.1f; 
 
     glFogi(GL_FOG_MODE, GL_EXP); 
     glFogfv(GL_FOG_COLOR, fogColor); 
@@ -210,9 +210,11 @@ void render_app(App* app)
     set_view(&(app->camera));
     render_scene(&(app->scene));
 
-    render_submarine(&(app->submarine));
-    render_terrain(&(app->terrain));
     
+    render_terrain(&(app->terrain));
+
+    render_submarine(&(app->submarine));
+     
     glPopMatrix();
 
     if (app->camera.is_preview_visible) {

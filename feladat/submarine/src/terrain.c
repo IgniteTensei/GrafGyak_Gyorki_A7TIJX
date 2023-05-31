@@ -6,6 +6,7 @@
 void init_terrain(Terrain* terrain)
 {
     load_model(&(terrain->plane), "assets/models/plane.obj");
+    terrain->plane_texture = load_rgba_texture("assets/textures/oceanbottom.tif"); 
 
     terrain->material.ambient.red = 1.0;
     terrain->material.ambient.green = 1.0;
@@ -55,14 +56,17 @@ void update_terrain(Terrain* terrain)
 
 void render_terrain(const Terrain* terrain)
 {
-    //set_terrain_material(&(terrain->material));
+    set_terrain_material(&(terrain->material));
     render_plane(terrain);
 }
 
 void render_plane(const Terrain* terrain)
 {
     glPushMatrix();
+
     glRotatef(90.0f, 1.0f, 0.0f, 0.0f);
+    glBindTexture(GL_TEXTURE_2D, terrain->plane_texture);
     draw_model(&(terrain->plane));
+    
     glPopMatrix();
 }
