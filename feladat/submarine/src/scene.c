@@ -24,16 +24,17 @@ void init_scene(Scene* scene)
 
 void set_lighting()
 {
-    float ambient_light[] = { 0.0f, 0.0f, 0.0f, 1.0f };
-    float diffuse_light[] = { 1.0f, 1.0f, 1.0, 1.0f };
+    float ambient_light[] = { 0.01f, 0.01f, 0.01f, 1.0f };
+    float diffuse_light[] = { 0.0f, 0.0f, 0.0, 1.0f };
     float specular_light[] = { 0.0f, 0.0f, 0.0f, 1.0f };
-    float position[] = { 0.0f, 0.0f, 10.0f, 1.0f };
+    float position[] = { 0.0f, 0.0f, 100.0f, 1.0f };
 
     glLightfv(GL_LIGHT0, GL_AMBIENT, ambient_light);
     glLightfv(GL_LIGHT0, GL_DIFFUSE, diffuse_light);
     glLightfv(GL_LIGHT0, GL_SPECULAR, specular_light);
     glLightfv(GL_LIGHT0, GL_POSITION, position);
 }
+
 
 void set_material(const Material* material)
 {
@@ -64,13 +65,12 @@ void set_material(const Material* material)
 
 void update_scene(Scene* scene)
 {   
-    scene->rotation += 0.2f;
+
 }
 
 void render_scene(const Scene* scene)
 {
     set_material(&(scene->material));
-    set_lighting();
 }
 
 

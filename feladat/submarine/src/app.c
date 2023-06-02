@@ -73,6 +73,11 @@ void init_opengl()
 
     glEnable(GL_LIGHTING);
     glEnable(GL_LIGHT0);
+    set_lighting();
+    //glDisable(GL_LIGHTING);
+
+    glEnable(GL_LIGHT1);
+    //glEnable(GL_LIGHTING);
 }
 
 void reshape(GLsizei width, GLsizei height)
@@ -100,14 +105,14 @@ void reshape(GLsizei width, GLsizei height)
     glFrustum(
         -.08, .08,
         -.06, .06,
-        .1, 50
+        .1, 100
     );
 }
 
 void set_fog()
 {
-    GLfloat fogColor[] = { 0.06f, 0.16f, 0.3f, 0.9f };
-    GLfloat fogDensity = 0.1f; 
+    GLfloat fogColor[] = { 0.06f, 0.16f, 0.3f, 1.0f };
+    GLfloat fogDensity = 0.05f; 
 
     glFogi(GL_FOG_MODE, GL_EXP); 
     glFogfv(GL_FOG_COLOR, fogColor); 
@@ -132,16 +137,22 @@ void handle_app_events(App* app)
                 app->is_running = false;
                 break;
             case SDL_SCANCODE_W:
-                set_camera_speed(&(app->camera), 1);
+                set_camera_speed(&(app->camera), 5);
                 break;
             case SDL_SCANCODE_S:
-                set_camera_speed(&(app->camera), -1);
+                set_camera_speed(&(app->camera), -5);
                 break;
             case SDL_SCANCODE_A:
-                set_camera_side_speed(&(app->camera), 1);
+                set_camera_side_speed(&(app->camera), 5);
                 break;
             case SDL_SCANCODE_D:
-                set_camera_side_speed(&(app->camera), -1);
+                set_camera_side_speed(&(app->camera), -5);
+                break;
+            case SDL_SCANCODE_Z:
+                set_submarine_speed(&(app->submarine), 1);
+                break;
+            case SDL_SCANCODE_H:
+                set_submarine_speed(&(app->submarine), -1);
                 break;
             default:
                 break;
@@ -156,6 +167,12 @@ void handle_app_events(App* app)
             case SDL_SCANCODE_A:
             case SDL_SCANCODE_D:
                 set_camera_side_speed(&(app->camera), 0);
+                break;
+            case SDL_SCANCODE_Z:
+                set_submarine_speed(&(app->submarine), 0);
+                break;
+            case SDL_SCANCODE_H:
+                set_submarine_speed(&(app->submarine), 0);
                 break;
             default:
                 break;
@@ -196,7 +213,7 @@ void update_app(App* app)
     update_camera(&(app->camera), elapsed_time);
     update_scene(&(app->scene));
 
-    update_submarine(&(app->submarine));
+    update_submarine(&(app->submarine), elapsed_time);
     update_terrain(&(app->terrain));
 }
 

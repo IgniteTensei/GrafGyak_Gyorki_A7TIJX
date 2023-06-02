@@ -15,6 +15,9 @@ typedef struct Terrain
     Model plane;
     GLuint plane_texture;
 
+    Model rock;
+    GLuint rock_texture;
+
 } Terrain;
 
 void init_terrain(Terrain* terrain);
@@ -28,5 +31,7 @@ void update_terrain(Terrain* terrain);
 void render_terrain(const Terrain* terrain);
 
 void render_plane(const Terrain* terrain);
+
+void render_rock(const Terrain* terrain);
 
 #endif /* TERRAIN_H */
